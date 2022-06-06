@@ -54,40 +54,40 @@ If you're familiar with Bayesian probability, this section might help you unders
 
 First, I'm going to lay out some variables.
 
-$X$ = observed variables = our dataset
+$$X$$ = observed variables = our dataset
 
-$z$ = latent variables that we want to learn
+$$z$$ = latent variables that we want to learn
 
-So, given our observed variables $X$, we want to learn the posterior distribution $p(z|x)$. Bayes' Law gives us the equation $  P(z|x) = \frac{P(z)P(x|z)}{P(x)} $
+So, given our observed variables $$X$$, we want to learn the posterior distribution $$p(z|x)$$. Bayes' Law gives us the equation $$  P(z|x) = \frac{P(z)P(x|z)}{P(x)} $$
 
 
-The problem is that we don't know $P(x)$. If you expand this distribution, you'll find that its intractable. 
+The problem is that we don't know $$P(x)$$. If you expand this distribution, you'll find that its intractable. 
 
-So, we have to use another means of approximating $ P(z|x)$. We'll use a surrogate posterior $q(z|x)$, training $q(z|x)$ to be as close to $ P(z|x) $ as possible using Evidence-Lower Bound, ELBO. ELBO incorporates KL-Divergence, along with some log algebra to get a tractable expression.
+So, we have to use another means of approximating $$ P(z|x)$$. We'll use a surrogate posterior $$q(z|x)$$, training $$q(z|x)$$ to be as close to $$ P(z|x) $$ as possible using Evidence-Lower Bound, ELBO. ELBO incorporates KL-Divergence, along with some log algebra to get a tractable expression.
 
-$ D_{KL}(q||p) = \mathbb{E_q}[{\log{\frac{q(z|x)}{P(z|x)}}}] = \mathbb{E_q}[{\log{q(z|x)}}]-\mathbb{E_q}[{\log{P(z|x)}}] = \mathbb{E_q}[{\log{q(z|x)}}]-\mathbb{E_q}[{\log{\frac{P(z,x)}{P(x)}}}] $
+$$ D_{KL}(q||p) = \mathbb{E_q}[{\log{\frac{q(z|x)}{P(z|x)}}}] = \mathbb{E_q}[{\log{q(z|x)}}]-\mathbb{E_q}[{\log{P(z|x)}}] = \mathbb{E_q}[{\log{q(z|x)}}]-\mathbb{E_q}[{\log{\frac{P(z,x)}{P(x)}}}] $$
 
 Skipping a few steps of the derivation gives us...
 
-$ D_{KL}(q||p) = \mathbb{E_q}[\log{q(z|x)}]-\mathbb{E_q}[\log{p(z,x)}]+\log{p(x)}$
+$$ D_{KL}(q||p) = \mathbb{E_q}[\log{q(z|x)}]-\mathbb{E_q}[\log{p(z,x)}]+\log{p(x)}$$
 
-$\log{p(x)}$ is known as marginal-log likelihood. Rearranging in terms of this, we get.
+$$\log{p(x)}$$ is known as marginal-log likelihood. Rearranging in terms of this, we get.
 
-$\log{p(x)} = D_{KL}(q||p) - \mathbb{E_q}[\log{q(z|x)}]-\mathbb{E_q}[\log{p(z,x)}]$
+$$\log{p(x)} = D_{KL}(q||p) - \mathbb{E_q}[\log{q(z|x)}]-\mathbb{E_q}[\log{p(z,x)}]$$
 
 While the KL-Divergence term is still intractable, there's an important property to remember: it must be greater than or equal to 0.
 
-$\log{p(x)} \geq D_{KL}(q||p) - \mathbb{E_q}[\log{q(z|x)}]-\mathbb{E_q}[\log{p(z,x)}]$
+$$\log{p(x)} \geq D_{KL}(q||p) - \mathbb{E_q}[\log{q(z|x)}]-\mathbb{E_q}[\log{p(z,x)}]$$
 
 The right term is known as Evidence-Lower Bound. By maximizing ELBO in this formula, we will minimize KL-Divergence. It's a very clever solution that gives us an optimization problem. 
 
-$ ELBO =   \mathbb{E_q}[\log{q(z|x)}]-\mathbb{E_q}[\log{p(z,x)}]$
+$$ ELBO =   \mathbb{E_q}[\log{q(z|x)}]-\mathbb{E_q}[\log{p(z,x)}]$$
 
 Doing more rearranging gives the formula:
 
-$ ELBO =   \mathbb{E_q}[\log{P(x|z)}]-\mathbb{E_q}[\log{\frac{q(z|x)}{p(z)}}]$
+$$ ELBO =   \mathbb{E_q}[\log{P(x|z)}]-\mathbb{E_q}[\log{\frac{q(z|x)}{p(z)}}]$$
 
-$p(z)$ is a prior distribution that we already know. There are two terms, $P(x|z)$ and $q(z|x)$ that have to be learned. These two are learned through our neural networks. The encoder finds the distribution for $q(z|x)$; the decoder, $P(x|z)$.
+$$p(z)$$ is a prior distribution that we already know. There are two terms, $$P(x|z)$$ and $$q(z|x)$$ that have to be learned. These two are learned through our neural networks. The encoder finds the distribution for $$q(z|x)$$; the decoder, $$P(x|z)$$.
 
 This bayesian view can be linked back to the original VAE architecture. The first term is the reconstruction error and the second is KL-Divergence, which is essentially finding a ratio of probability distributions.
 
