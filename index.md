@@ -9,21 +9,21 @@ You too may help make these notes better by submitting your improvements to us v
 
 This course starts by introducing probabilistic graphical models from the very basics and concludes by explaining from first principles the [variational auto-encoder](extras/vae), an important probabilistic model that is also one of the most influential recent results in deep learning.
 
-## Preliminaries
+## Sports Analytics
 
-1. [Introduction](preliminaries/introduction/): What is probabilistic graphical modeling? Overview of the course.
+1. [Introduction](analytics/positionless/): What is probabilistic graphical modeling? Overview of the course.
 
 2. [Review of probability theory](preliminaries/probabilityreview): Probability distributions. Conditional probability. Random variables (*under construction*).
 
 3. [Examples of real-world applications](preliminaries/applications): Image denoising. RNA structure prediction. Syntactic analysis of sentences. Optical character recognition (*under construction*).
 
-## Representation
+## Graphics
 
 1. [Bayesian networks](representation/directed/): Definitions. Representations via directed graphs. Independencies in directed models.
 
 2. [Markov random fields](representation/undirected/): Undirected vs directed models. Independencies in undirected models. Conditional random fields.
 
-## Inference
+## Algos From Scratch
 
 1. [Variable elimination](inference/ve/) The inference problem. Variable elimination. Complexity of inference.
 
@@ -34,21 +34,3 @@ This course starts by introducing probabilistic graphical models from the very b
 4. [Sampling-based inference](inference/sampling/): Monte-Carlo sampling. Forward Sampling. Rejection Sampling. Importance sampling. Markov Chain Monte-Carlo. Applications in inference.
 
 5. [Variational inference](inference/variational/): Variational lower bounds. Mean Field. Marginal polytope and its relaxations.
-
-## Learning
-
-1. [Learning in directed models](learning/directed/): Maximum likelihood estimation. Learning theory basics. Maximum likelihood estimators for Bayesian networks.
-
-2. [Learning in undirected models](learning/undirected/): Exponential families. Maximum likelihood estimation with gradient descent. Learning in CRFs
-
-3. [Learning in latent variable models](learning/latent/): Latent variable models. Gaussian mixture models. Expectation maximization.
-
-4. [Bayesian learning](learning/bayesian/): Bayesian paradigm. Conjugate priors. Examples (*under construction*).
-
-5. [Structure learning](learning/structure/): Chow-Liu algorithm. Akaike information criterion. Bayesian information criterion. Bayesian structure learning (*under construction*).
-
-## Bringing it all together
-
-1. [The variational autoencoder](extras/vae): Deep generative models. The reparametrization trick. Learning latent visual representations.
-
-2. [List of further readings](extras/readings): Structured support vector machines. Bayesian non-parametrics.
