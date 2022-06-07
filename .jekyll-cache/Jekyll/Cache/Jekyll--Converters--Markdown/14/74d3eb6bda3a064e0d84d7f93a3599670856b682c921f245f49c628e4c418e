@@ -1,0 +1,95 @@
+I"�-<p>A linear regression model is the simplest of all machine learning models. In fact, calling it a <em>machine learning model</em> in the first place makes it sound more complicated than it really is. All we want to do is find a set of parameters(think slope and y-intercept) that properly relates an input to an output. When you got a scatter plot of points and drew a line of best fit through them, you were a linear regression model.</p>
+
+<p>Those problems were typically in the form \(y=mx+b\). Here, \(m\) and \(b\) are the paremeters we want to learn, \(x\) is the input data, and \(y\) is what we’re trying to predict. This could be, for instance, for predicting someone’s weight based on their height.</p>
+
+<p>For most projects, however, we want more than one input dimension. There could be many input features. Imagine you want to predict the price of the car using a linear model. For input, you might have the car’s age, brand, mpg, etc. To generalize the \(y=mx+b\) formula to higher dimensions, we have to use linear algebra.</p>
+
+<p>The formula is \(Ax=b\). \(A\) (which includes a column of \(1\)s  for the y-intercept term) is our input data, \(x\) is the parameters, and \(b\) is the output. It’s a little confusing since \(x\) and \(b\) were completely different before, but you should get used to this representation.</p>
+
+<p>This problem would be really simple to solve for if \(A\) were invertible, since we could simply do:</p>
+
+\[x=A^{-1}b\]
+
+<p>Unfortunately, that requires that A is invertible, meaning that A must be a square matrix. This is essentially never the case for any dataset—have you ever seen a dataset with as many columns(features) as rows(individual data points)? So we need some way to find x without using the inverse.</p>
+
+<h2 id="svd">SVD</h2>
+
+<p>The singular value decomposition factorizes a matrix \(A\) into three components: \(U, \Sigma,\) and \(V^{T}\).</p>
+
+\[A=U\Sigma V^{T}\]
+
+<p>This equation comes from \(AV=U\Sigma\). \(V\) is the right singular vector matrix, \(U\) is the left singular vector matrix, and \(\Sigma\) is the singular value matrix. At this point, you might notice that \(V\) was moved over to the other side of the equation just by finding the transpose. This is because both \(U\) and \(V\) are <em>orthogonal</em> matrices, meaning that \(V^{-1}=V^{T}\). But why is that the case? It comes back to how we get \(U\) and \(V\) in the first place: eigendecompositions.</p>
+
+<p>An eigendecomposition factorizes a square matrix \(A\) into two matrices, one for the eigenvectors and the other for eigenvalues.</p>
+
+<p>\(AV=V\Lambda\) or \(A=V\Lambda V^{-1}\)</p>
+
+<p>When the matrix is symmetric, the eigenvectors will be orthogonal to eachother and therefore \(V^{-1}=V^{T}\).</p>
+
+\[A=V\Lambda V^{T}\]
+
+<p>Since \(U\) and \(V\) are both orthogonal matrices, there’s clearly some relation to the eigenvalue decomposition of a square and symmetric matrix. As it happens, we can transform our matrix A into a  symmetric and square matrix by multiplying itself by the transpose —\(A^{T}A\). Plugging the SVD factorization back in for \(A\), we get this.</p>
+
+\[A^{T}A=(U\Sigma V^{T})^{T}(U\Sigma V^{T})=(V\Sigma U^{T})(U\Sigma V^{T})=V\Sigma UU^{T}\Sigma V^{T}=V\Sigma^{2} V^{T}\]
+
+<p>The same goes for U, except we right multiply the transpose.</p>
+
+\[AA^{T}=(U\Sigma V^{T})(U\Sigma V^{T})^{T}=(U\Sigma V^{T})(V\Sigma U^{T})=U\Sigma VV^{T}\Sigma U^{T}=U\Sigma^{2} U^{T}\]
+
+<p>Both \(U\) and \(V\) can be found by finding the eigendecomposition of the data matrix \(A\) multiplied by its transpose in different directions.</p>
+
+<p>This is the basic concept of the SVD. While there’s a lot more to go into, that’s all we really need. Now that there’s a simple factorization for \(A\), we can find it’s pseudo-inverse and use that to solve the equation \(Ax=b\).</p>
+
+\[U\Sigma V^{T}x=b\]
+
+\[x=(U\Sigma V^{T})^{-1}b=(V\Sigma^{-1} U^{T})b\]
+
+<h3 id="svd-implementation">SVD Implementation</h3>
+
+<p>Although finding the singular value decomposition seems relatively simple, it’s difficult to implement. Instead, we’ll use the <code class="language-plaintext highlighter-rouge">svd</code> function from <code class="language-plaintext highlighter-rouge">numpy.linalg</code>. We’ll also import <code class="language-plaintext highlighter-rouge">make_regression</code> <code class="language-plaintext highlighter-rouge">sklearn.datasets</code> to create a simple dataset.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="kn">from</span> <span class="nn">np.linalg</span> <span class="kn">import</span> <span class="n">svd</span>
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_regression</span>
+</code></pre></div></div>
+<p>I want to start out on a dataset with 1000 samples and just one feature so it can be visualized easily. To account for the bias term, we have to add a column of zeros to \(A\). \(A\) now has the shape \((1000, 2)\).</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">A</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">make_regression</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">n_features</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">A</span><span class="p">,</span> <span class="n">np</span><span class="p">.</span><span class="n">ones</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">A</span><span class="p">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">1</span><span class="p">))))</span>
+</code></pre></div></div>
+
+<p><img src="/img/posts/linearreg/baseplot.png" alt="LinearLogisticNakedScatter.png" /></p>
+
+<p>Now that the dataset is in order, let’s find the SVD of \(A\).</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">U</span><span class="p">,</span><span class="n">S</span><span class="p">,</span><span class="n">V_T</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">linalg</span><span class="p">.</span><span class="n">svd</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="c1">#svd returns S as a 1d-matrix, so we have to diagonalize it
+</span><span class="n">S</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">diag</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+
+<span class="n">np</span><span class="p">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">U</span><span class="o">@</span><span class="n">S</span><span class="o">@</span><span class="n">V_T</span><span class="p">,</span><span class="n">atol</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">)</span> <span class="c1">#returns True -&gt; U@S@V_T=A
+</span></code></pre></div></div>
+
+<p>The shapes of <code class="language-plaintext highlighter-rouge">U</code>,<code class="language-plaintext highlighter-rouge">S</code>, and <code class="language-plaintext highlighter-rouge">V_T</code> are <code class="language-plaintext highlighter-rouge">(1000, 2)</code>, <code class="language-plaintext highlighter-rouge">(2, 2)</code>, <code class="language-plaintext highlighter-rouge">(2, 2)</code>. We’re not getting the full matrices because we want the economy SVD. The economy SVD truncates elements of the array that aren’t needed and puts it into a shape that we can multiply together. If <code class="language-plaintext highlighter-rouge">full_matrices=True</code>, <code class="language-plaintext highlighter-rouge">U</code> would have the shape <code class="language-plaintext highlighter-rouge">(1000, 1000)</code>.</p>
+
+<p>To get \(x\) like we wanted, all that’s left is to use that inverse SVD formula above.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inverse_SVD</span><span class="o">=</span> <span class="p">(</span><span class="n">V_T</span><span class="p">.</span><span class="n">T</span><span class="o">@</span><span class="n">np</span><span class="p">.</span><span class="n">linalg</span><span class="p">.</span><span class="n">inv</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">@</span><span class="n">U</span><span class="p">.</span><span class="n">T</span><span class="p">)</span>
+<span class="n">x</span><span class="o">=</span><span class="n">inverse_SVD</span><span class="o">@</span><span class="n">b</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">x</code> should be the shape <code class="language-plaintext highlighter-rouge">(2,)</code>. The slope is the first term and the y-intercept is the second. Finding the corresponding output is as simple as taking the dot product of the parameters and the row vector of <code class="language-plaintext highlighter-rouge">A</code>. <code class="language-plaintext highlighter-rouge">predict_mult</code> just applies the prediction function to all of <code class="language-plaintext highlighter-rouge">A</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">parameters</span><span class="o">@</span><span class="n">x</span>
+
+<span class="k">def</span> <span class="nf">predict_mult</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span><span class="n">x_array</span><span class="p">):</span>
+    <span class="n">predictions</span><span class="o">=</span><span class="p">[</span><span class="n">predict</span><span class="p">(</span><span class="n">parameters</span><span class="p">,</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_array</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">predictions</span>
+  
+<span class="n">y_pred</span><span class="o">=</span><span class="n">predict_mult</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">A</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/img/posts/linearreg/withreg.png" alt="LinearLogisticLinedScatter.png" /></p>
+
+<p>You can also test this process with a higher number of features(dimensions) and it’ll work properly. My mean squared error for the 2D example shown above was 100 and was 98 for 3 features.</p>
+:ET

@@ -274,7 +274,7 @@ Notice the three-pointers from right at the top of the key — classic.
 
 ### Cluster 4—Star Bigs :
 
-![Cluster 4](/img/posts/DisprovingTheMyth/Clluster4.png)
+![Cluster 4](/img/posts/DisprovingTheMyth/Cluster4.png)
 
 It’s clear that this cluster is selecting for star bigs. Unlike star guards, who they share the most in common with, these players should have higher rebounding percentage, lower assist numbers, and better efficiency(besides free throws).
 
@@ -321,7 +321,7 @@ The defensive rating shows why these guys are still getting paid. Like the clust
 
 Rubio and Rondo make me think that we’re looking at playmakers here.
 
-![Steve Nash](/img/posts/DisprovingTheMyth/SteveNash.png)
+![Steve Nash](/img/posts/DisprovingTheMyth/SteveNash.jpeg)
 
 Image by Keith Allison on Wikimedia Commons
 

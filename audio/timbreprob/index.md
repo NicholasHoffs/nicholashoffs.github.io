@@ -58,18 +58,19 @@ $$X$$ = observed variables = our dataset
 
 $$z$$ = latent variables that we want to learn
 
-So, given our observed variables $$X$$, we want to learn the posterior distribution $$p(z|x)$$. Bayes' Law gives us the equation $$  P(z|x) = \frac{P(z)P(x|z)}{P(x)} $$
+So, given our observed variables $$X$$, we want to learn the posterior distribution $$p(z|x)$$ . Bayes' Law gives us the equation:
 
+$$  P(z|x) = \frac{P(z)P(x|z)}{P(x)} $$
 
 The problem is that we don't know $$P(x)$$. If you expand this distribution, you'll find that its intractable. 
 
-So, we have to use another means of approximating $$ P(z|x)$$. We'll use a surrogate posterior $$q(z|x)$$, training $$q(z|x)$$ to be as close to $$ P(z|x) $$ as possible using Evidence-Lower Bound, ELBO. ELBO incorporates KL-Divergence, along with some log algebra to get a tractable expression.
+So, we have to use another means of approximating $$P(z|x)$$. We'll use a surrogate posterior $$q(z|x)$$, training $$q(z|x)$$ to be as close to $$ P(z|x) $$ as possible using Evidence-Lower Bound, ELBO. ELBO incorporates KL-Divergence, along with some log algebra to get a tractable expression.
 
-$$ D_{KL}(q||p) = \mathbb{E_q}[{\log{\frac{q(z|x)}{P(z|x)}}}] = \mathbb{E_q}[{\log{q(z|x)}}]-\mathbb{E_q}[{\log{P(z|x)}}] = \mathbb{E_q}[{\log{q(z|x)}}]-\mathbb{E_q}[{\log{\frac{P(z,x)}{P(x)}}}] $$
+$$D_{KL}(q||p) = \mathbb{E_q}[{\log{\frac{q(z|x)}{P(z|x)}}}] = \mathbb{E_q}[{\log{q(z|x)}}]-\mathbb{E_q}[{\log{P(z|x)}}] = \mathbb{E_q}[{\log{q(z|x)}}]-\mathbb{E_q}[{\log{\frac{P(z,x)}{P(x)}}}]$$
 
 Skipping a few steps of the derivation gives us...
 
-$$ D_{KL}(q||p) = \mathbb{E_q}[\log{q(z|x)}]-\mathbb{E_q}[\log{p(z,x)}]+\log{p(x)}$$
+$$D_{KL}(q||p) = \mathbb{E_q}[\log{q(z|x)}]-\mathbb{E_q}[\log{p(z,x)}]+\log{p(x)}$$
 
 $$\log{p(x)}$$ is known as marginal-log likelihood. Rearranging in terms of this, we get.
 
