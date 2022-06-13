@@ -1,3 +1,8 @@
+---
+layout: post
+title: "SportVU Part 1: Loading SportVU and EDA"
+categories: misc
+---
 
 SportVU is a camera tracking technology that the NBA used from 2013-2014 to 2016-2017. It was originally created in 2005 in Israel by missile tracking scientists. No wonder their system works so well. SportVU works through a system of six-cameras which take 25 photos a second (one photo every .04 seconds).
 
@@ -116,7 +121,7 @@ player_df['LOC_Z'] = player_df['LOC_Z']+1
 player_df['MOMENT_NUM'] = np.divmod(np.arange(len(player_df)),11)[0]+1
 ```
 ___
-```python
+```
 TEAM_ID	PLAYER_ID	LOC_X	LOC_Y	LOC_Z	MOMENT_NUM
 0	-1.000000e+00	-1.0	66.19088	20.37273	2.94592	1
 1	1.610613e+09	2594.0	28.58620	21.64312	1.00000	1
