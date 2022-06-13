@@ -6,7 +6,10 @@ This site hosts my personal projects. You can find source code on [my GitHub pag
 
 ## Sports Analytics
 
-1. [Introduction](analytics/positionless/): Disputing the myth of positionless basketball with K-Means clustering.
+1. [Demystifying "Positionless Basketball"](analytics/positionless/): Disputing the myth of positionless basketball with K-Means clustering.
+
+2. [SportVU Part 1](analytics/sportvup1/): Loading SportVU and EDA
+
 
 ## Algos From Scratch
 
