@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "Disproving the Myth of “Positionless Basketball” with K-Means Clustering"
-categories: misc
 ---
 
 “Positionless Basketball” is a misnomer. It’s no wonder that the standards created over half a century ago no longer apply to today’s game, and we shouldn’t expect them to. Bigs can shoot threes, point guards do more than pass, and [some seven-footers pass like Magic](https://www.nba.com/player/203999). It’s time to change how we define NBA positions — Enter K-Means.

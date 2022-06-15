@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "Algorithms From Scratch: Linear Regression"
-categories: misc
 ---
 
 A linear regression model is the simplest of all machine learning models. In fact, calling it a *machine learning model* in the first place makes it sound more complicated than it really is. All we want to do is find a set of parameters(think slope and y-intercept) that properly relates an input to an output. When you got a scatter plot of points and drew a line of best fit through them, you were a linear regression model.

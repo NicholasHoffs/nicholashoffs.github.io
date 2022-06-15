@@ -2,6 +2,7 @@
 layout: post
 title: Contents
 ---
+
 This site hosts my personal projects. You can find source code on [my GitHub page](https://github.com/NicholasHoffs)
 
 ## Algos From Scratch
