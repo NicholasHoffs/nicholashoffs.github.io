@@ -59,7 +59,7 @@ $$X$$ = observed variables = our dataset
 
 $$z$$ = latent variables that we want to learn
 
-So, given our observed variables $$X$$, we want to learn the posterior distribution $p(z|x)$ . Bayes' Law gives us the equation:
+So, given our observed variables $$X$$, we want to learn the posterior distribution $p(z|x)$. Bayes' Law gives us the equation:
 
 $$  P(z|x) = \frac{P(z)P(x|z)}{P(x)} $$
 
@@ -89,7 +89,7 @@ Doing more rearranging gives the formula:
 
 $$ ELBO =   \mathbb{E_q}[\log{P(x|z)}]-\mathbb{E_q}[\log{\frac{q(z|x)}{p(z)}}]$$
 
-$p(z)$ is a prior distribution that we already know. There are two terms, $P(x|z)$ and $ q(z|x)$ that have to be learned. These two are learned through our neural networks. The encoder finds the distribution for $q(z|x)$; the decoder, $P(x|z)$.
+$p(z)$ is a prior distribution that we already know. There are two terms, $P(x|z)$ and $q(z|x)$ that have to be learned. These two are learned through our neural networks. The encoder finds the distribution for $q(z|x)$; the decoder, $P(x|z)$.
 
 This bayesian view can be linked back to the original VAE architecture. The first term is the reconstruction error and the second is KL-Divergence, which is essentially finding a ratio of probability distributions.
 
@@ -118,7 +118,8 @@ The only issue with spectrograms is that you can't play them; it has to be conve
  
 Despite these drawbacks, spectrograms are the input of choice for most deep learning projects. Some models use Wavenet, a vocoder built out of diluted convolutional neural networks. In some cases, they can perform much better than Griffin-Lim reconstruction (the traditional inversion method) from a Mel-spectrogram.
 
- ## Bringing It All Together
+## Bringing It All Together
+
 By combining VAEs and a proper dataset of spectrograms, we can, in theory, create a more interpretable timbre space that can be interpolated through. Putting aside the "timbre problem" for a second, there's so many interesting opportunities for this to be used for music.
 
 Imagine the perfect disentangled latent space. There would be three axes: the pitch, the loudness, and the timbre. It'll almost certainly be more complex than this, but for a second act like timbre can be represented in a single dimension and all the axes are independent.
@@ -129,8 +130,7 @@ Then, you could load in a database of instrument notes and construct a latent sp
 
 From a scientific perspective, having a interpolable latent space would make it so much easier to investigate the physical sources of timbre. By slightly nudging along the piano-violin line and observing the differences in the resulting spectrogram, you could get a much better idea of what's contributing to that difference. This is similar to what Grey was doing in the '70s, but so much simpler. There's no need for human dissimilarity ratings, and you can explore the latent space as thoroughly as possible.
 
-
- ## Current Research
+## Current Research
  
  Because of the popularity of style transfer in computer vision, timbre transfer is a popular avenue to explore timbre. There are plenty of papers I could show here, but I specifically wanted to show the wide variety of modifications that can be applied to the traditional VAE architecture.
  
