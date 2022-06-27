@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "SportVU Part 1: Loading SportVU and EDA"
+usemathjax: true
 ---
 
 SportVU is a camera tracking technology that the NBA used from 2013-2014 to 2016-2017. It was originally created in 2005 in Israel by missile tracking scientists. No wonder their system works so well. SportVU works through a system of six-cameras which take 25 photos a second (one photo every .04 seconds).

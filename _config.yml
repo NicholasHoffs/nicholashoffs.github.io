@@ -5,6 +5,7 @@ author: Nicholas Hoffs
 simple_search: http://google.com/search
 description: Personal projects
 name: nicholas-hoffs-blog
+markdown: kramdown
 markdown_ext: "markdown,mkdown,mkdn,mkd,md"
 permalink: /articles/:short_year/:title
 #timezone: America/Los_Angeles

@@ -1,4 +1,4 @@
-I"3F<p><em>“Understanding timbre is perhaps the most challenging problem facing the musical community at the present time… Timbre is an area that is ripe for investigation, but certain methodological and conceptual problems arise.”</em> - Carol L Krumhansl</p>
+I"5F<p><em>“Understanding timbre is perhaps the most challenging problem facing the musical community at the present time… Timbre is an area that is ripe for investigation, but certain methodological and conceptual problems arise.”</em> - Carol L Krumhansl</p>
 
 <p>That quote was written way back in 1989. Ten years later, Keith Dana Martin wrote that timbre “is empty of scientific meaning, and should be expunged from the vocabulary of hearing science.”</p>
 
@@ -103,7 +103,7 @@ As you can see, different locations in the space correspond to different numbers
   <tbody>
     <tr>
       <td>\(p(z)\) is a prior distribution that we already know. There are two terms, $$P(x</td>
-      <td>z)\(and\)q(z</td>
+      <td>z) \(and\) q(z</td>
       <td>x)\(that have to be learned. These two are learned through our neural networks. The encoder finds the distribution for\)q(z</td>
       <td>x)\(; the decoder,\)P(x</td>
       <td>z)$$.</td>
