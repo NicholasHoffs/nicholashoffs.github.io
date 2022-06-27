@@ -59,11 +59,11 @@ $$X$$ = observed variables = our dataset
 
 $$z$$ = latent variables that we want to learn
 
-So, given our observed variables $$X$$, we want to learn the posterior distribution $$p(z|x)$$ . Bayes' Law gives us the equation:
+So, given our observed variables $$X$$, we want to learn the posterior distribution $p(z|x)$ . Bayes' Law gives us the equation:
 
 $$  P(z|x) = \frac{P(z)P(x|z)}{P(x)} $$
 
-The problem is that we don't know $$P(x)$$. If you expand this distribution, you'll find that its intractable. 
+The problem is that we don't know $P(x)$. If you expand this distribution, you'll find that its intractable. 
 
 So, we have to use another means of approximating $P(z|x)$. We'll use a surrogate posterior $q(z|x)$, training $q(z|x)$ to be as close to $P(z|x)$ as possible using Evidence-Lower Bound, ELBO. ELBO incorporates KL-Divergence, along with some log algebra to get a tractable expression.
 
@@ -89,7 +89,7 @@ Doing more rearranging gives the formula:
 
 $$ ELBO =   \mathbb{E_q}[\log{P(x|z)}]-\mathbb{E_q}[\log{\frac{q(z|x)}{p(z)}}]$$
 
-$$p(z)$$ is a prior distribution that we already know. There are two terms, $P(x|z)$ and $$ q(z|x)$$ that have to be learned. These two are learned through our neural networks. The encoder finds the distribution for $$q(z|x)$$; the decoder, $$P(x|z)$$.
+$p(z)$ is a prior distribution that we already know. There are two terms, $P(x|z)$ and $ q(z|x)$ that have to be learned. These two are learned through our neural networks. The encoder finds the distribution for $q(z|x)$; the decoder, $P(x|z)$.
 
 This bayesian view can be linked back to the original VAE architecture. The first term is the reconstruction error and the second is KL-Divergence, which is essentially finding a ratio of probability distributions.
 
