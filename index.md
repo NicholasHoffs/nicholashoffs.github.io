@@ -9,6 +9,8 @@ This site hosts my personal projects. You can find source code on [my GitHub pag
 
 1. [Linear Regression](scratch/linearreg): The most basic - implemented using SVD.
 
+1. [K-Nearest Neighbors](scratch/knn): A very simple KNN classifier on the Iris dataset.
+
 ## Sports Analytics
 
 1. [Demystifying "Positionless Basketball"](analytics/positionless): Disputing the myth of positionless basketball with K-Means clustering.
