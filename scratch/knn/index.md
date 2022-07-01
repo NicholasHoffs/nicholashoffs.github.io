@@ -74,13 +74,13 @@ axis[1,1].set_ylabel("Petal Width")
 plt.show()
 ```
 
-![clipboard.png](inkdrop://file:t2dTqMgm-)
+![clipboard.png](/img/posts/knn/plots.png)
 
 As you can see, some of these plots show two very distinct groups. We have three separate flowers though. Clearly, the data isn't so obviously separable.
 
 Running a correlation matrix on this data gives some more insight.
 
-![clipboard.png](inkdrop://file:BPfZwkmza)
+![clipboard.png](/img/posts/knn/corr.png)
 
 If you read through the documentation on this dataset from sklearns website, you'll see that "one class is linearly separable from the other 2; the latter are NOT linearly separable from each other." KNN, however, is not a linear classifier. 
 
