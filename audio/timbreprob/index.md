@@ -59,7 +59,7 @@ $$X$$ = observed variables = our dataset
 
 $$z$$ = latent variables that we want to learn
 
-So, given our observed variables $$X$$, we want to learn the posterior distribution $p(z|x)$. Bayes' Law gives us the equation:
+So, given our observed variables $X$, we want to learn the posterior distribution $p(z|x)$. Bayes' Law gives us the equation:
 
 $$  P(z|x) = \frac{P(z)P(x|z)}{P(x)} $$
 
